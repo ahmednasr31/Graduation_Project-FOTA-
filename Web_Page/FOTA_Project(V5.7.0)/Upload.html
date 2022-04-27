@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>FOTA | Upload</title>
+        <link rel="icon" href="./IMG/img3.png" type="image/icon type">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="./CSS/Upload.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap">
+
+
+        <!-- JS -->
+        <script src="https://kit.fontawesome.com/dfb217dfe6.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+        <script>
+            function uploadfile(){
+              var filename = $('#filename').val();                    //To save file with this name
+              var file_data = $('.fileToUpload').prop('files')[0];    //Fetch the file
+              var form_data = new FormData();
+              form_data.append("file",file_data);
+              form_data.append("filename",filename);
+              //Ajax to send file to upload
+              $.ajax({
+                  url: "upload.php",                      //Server api to receive the file
+                         type: "POST",
+                         dataType: 'script',
+                         cache: false,
+                         contentType: false,
+                         processData: false,
+                         data: form_data,
+                      success:function(dat2){
+                        if(dat2==1) alert("Successful");
+                        else alert("Unable to Upload");
+                      }
+                });
+            }
+            </script>
+    </head>
+    <body>
+        <div class="header">
+            <div class="cont">
+                <div class="logo">
+                    <img src="./IMG/img5.png">
+                </div>
+                <nav>
+                    <ul>
+                        <li> <i class="fa fa-home" ></i> <a href="Upload.html">Home</a></li>
+                        <li> <i class="fa fa-sign-in" ></i> <a href="index.html">Sign in</a></li>
+                        <li> <i class="fa fa-user-plus"></i> <a href="Sign_up.html">Create account</a></li> 
+                        <li> <i class='fas fa-users-cog'></i> <a href="#Services">Services</a> </li> 
+                        <li> <i class="fa fa-envelope"></i> <a href="#Contact">Contact</a> </li> 
+                    </ul>
+                    <i class="fas fa-bars toggle-menu"></i>
+                </nav>
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="landing">
+            <div class="cont">
+                <i class="fas fa-angle-left change-background fa-2x"></i>
+                <i class="fas fa-angle-right change-background fa-2x"></i>
+                <div class="backgr"></div>
+                <div class="card">
+                    <h2>FIRMWARE OVER THE AIR</h2>
+                    <p>Enables the operators of Internet-connected devices to perform upgrades of their firmware versions 
+                        remotely and seamlessly, without the need of physical intervention into the device. <br> 
+                        The ability to refresh the operating system of connected assets is essential in keeping 
+                        the devices secure, adding new functionalities and fixing bugs.
+                    </p>
+                </div>
+                <div id="uploadSec" class="upload">
+                        <input type="file" class="fileToUpload" ><br>
+                        <input type="text" id="filename" class="fileName" placeholder="File name"><br>
+                        <input type="submit" value="UPLOAD" class="UploadTheFile" onclick="uploadfile()">
+                </div>    
+            </div>
+        </div>
+        <div class="Services" id="Services">
+            <div class="cont">
+                <div class="title heading">
+                    <h1>SERVICES</h1>
+                    <p>Nowadays, Software on Automotive industry got more complicated and vehicles
+                        contains hundreds of ECUs with different functionalities.<br>
+                        As OEM detecting defects(bugs) after releasing Vehicles or OEM got new version
+                        with new features of software, updating software faster and easier is required.
+                    </p>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <i class="fa fa-shield"></i>
+                        <div class="optext">
+                            <h4>Speed</h4>
+                            <p>As using 3G , as well as Sending only Delta in each update.</p>
+                        </div>   
+                    </div>
+                    <div class="option">
+                        <i class="fa fa-flash"></i>
+                        <div class="optext">
+                            <h4>Security</h4>
+                            <p>As applying authentication for SW update user</p>
+                        </div>   
+                    </div>
+                    <div class="option">
+                        <i class="fa fa-handshake-o"></i>
+                        <div class="optext">
+                            <h4>Stability & Reliability</h4>
+                            <p>As its used CAN Network , with Backup SW Version in <br> secondary Memory</p>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact">
+            <div class="cont">
+                <div class="background"></div>
+                <div class="Comp">
+                    <div class="cont">
+                        <h1>Need Help? <br> We are here for any inquiries or complaints..</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contactUs" id="Contact">
+            <div class="cont">
+                <div class="title heading">
+                    <h1>CONTACT US</h1>
+                </div>
+            </div>
+            <div class="conect">
+                <div class="message">
+                    <input type="text" placeholder="Your Name">
+                    <input type="email" placeholder="Your Emile">
+                    <textarea placeholder="Describe your issue here.."></textarea>
+                    <button value="Send"><a href="#">SEND</a></button>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="cont">
+                <div class="data">
+                    <p>Mansoura University, CCE Department Graduation Project 2021-2022</p>
+                </div>
+                <div class="icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fas fa-home"></i></a>
+                </div>
+                <p>© 2022, FOTA.</p>
+            </div>
+        </footer>
+    </body>
+</html>

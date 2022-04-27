@@ -1,0 +1,147 @@
+import os 
+import tkinter as Tkinter
+import tkinter.messagebox as MSG
+#import UART_parser
+#from  Headunit import canvas1
+import time
+#from sensor_threaded  import*
+import RPi.GPIO as GPIO
+import threading
+
+counter=0
+TRIG=21
+ECHO=20
+GPIO.setmode(GPIO.BCM)
+
+
+
+def measure():
+    global TRIG , ECHO
+    print ("distance measurement in progress")
+    GPIO.setup(TRIG,GPIO.OUT)
+    GPIO.setup(ECHO,GPIO.IN)
+    GPIO.output(TRIG,False)
+    print ("waiting for sensor to settle")
+    time.sleep(0.2)
+    GPIO.output(TRIG,True)
+    time.sleep(0.00001)
+    GPIO.output(TRIG,False)
+    while GPIO.input(ECHO)==0:
+        pulse_start=time.time()
+    while GPIO.input(ECHO)==1:
+        pulse_end=time.time()
+    pulse_duration=pulse_end-pulse_start
+    distance=pulse_duration*17150
+    distance=round(distance,2)
+    print ("distance:",distance,"cm")
+    time.sleep(2)
+
+
+dis = threading.Thread( target=measure)
+dis.setDaemon(True)
+
+def none ():
+    #Glob_print="Unfortunately, This Service Not Supported Currently."
+
+#    helloCallBack()
+    MSG.showwarning( "Warning", "Unfortunately,This Service Not Supported Currently.")
+   # return "Unfortunately, This Service Not Supported Currently."
+    print ("Unfortunately, This Service Not Supported Currently.")
+
+
+'''
+def cruiseControl():
+    global counter , TRIG , ECHO
+    GPIO.setmode(GPIO.BCM)
+
+    counter ^= 1
+    if counter == 0 :
+#        dis.join()
+        pass
+
+    elif counter == 1 :
+        pass
+#        dis.start()
+#        while counter == 1 :
+#            measure()
+
+
+
+        #MSG.showinfo( "Message", "CRUISE CONTROL ON")
+        #print  ("on")
+
+'''
+def cruiseControl():
+    global counter
+    #terminate the Current process
+#    os.system("xdotool key ctrl+z ")
+#    time.sleep(.1)
+
+    if counter == 0 :
+        counter+=1
+        #stop thread
+        #reader.join()
+        os.popen("python3 hello.py").read()
+        MSG.showinfo( "Message", "CRUISE CONTROL OFF")
+        print  ("off")
+
+    elif counter == 1 :
+        counter=0
+        #sreturn = os.popen("python3 Cruise-Control/sensor-threaded.py &").read()
+        sreturn = os.popen("python3 sensor_threaded.py ").read()
+        #start thread
+        #reader.start()
+
+        MSG.showinfo( "Message", "CRUISE CONTROL ON")
+        print  ("on")
+
+'''
+def UpdateVersion ():
+
+    #global Global_Print
+    #Run SearchScript.sh (to update lastupdate file)
+    os.system("./SearchScript.sh ")
+
+    #Run FileToFlashUpdater.py with lastUpdate  parameter
+    scriptReturn = os.popen("python3 FileToFlashUpdater.py lastUpdate ").read() 
+
+    #Read the return of if okupdate Run UART_parser.py
+    if scriptReturn == "oklastupdate" :
+        MSG.showinfo( "Message", "UPDATING")
+        os.system("python3 UART_parser.py ")
+        print  ("updating")
+
+
+    #If noupdate return ("YOU ARE UP TO DATE")
+    elif scriptReturn == 'noupdate' :
+        MSG.showinfo( "Message", "YOU ARE UP TO DATE")
+        print  ("YOU ARE UP TO DATE")
+
+    else :
+        print ("else is_"+scriptReturn+"_")
+
+
+
+
+def BackLastVersion():
+    #just read script
+    scriptReturn = os.popen("python3 FileToFlashUpdater.py lastFlashed ").read() 
+    #print (scriptReturn)
+
+    #Read the return of if ..........
+    if scriptReturn == "oklastflashed" :
+        print  ("Backing To The Old")
+        MSG.showinfo( "Message", "BACKING TO THE  OLD VESION")
+
+        os.system("python3 UART_parser.py")
+
+    #If return ("YO")
+    elif scriptReturn == "alreadyold" :
+        MSG.showinfo( "Message", "YOU ARE ALREADY ON THE OLD VERSION")
+        print  ("You are on the old")
+
+    else :
+        print ("else is_"+scriptReturn+"_")
+
+
+

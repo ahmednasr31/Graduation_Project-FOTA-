@@ -1,0 +1,100 @@
+*,html,body {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: "inherit";
+}
+.ALL{
+    display: flex;
+    width: 100%;
+    height: 90vh;
+}
+.signInSide {
+    width: 50%;
+}
+.login {
+    width: 80%;
+    height: 80%;
+    margin: 20% 0 0 27%;
+    padding: 2%;
+}
+.imageSide {
+    width: 50%;
+    padding: 3%;
+    padding-left: 0;
+}
+.imageSide img {
+    width: 95%;
+}
+input {
+    width: 70%;
+    height: 10%;
+    border-radius: 5px;
+    border: 1px solid #b4b4b4;
+    font-size: 17px;
+    margin-top: 5%;
+    padding: 10px;
+}
+input:focus {
+    box-shadow: 5px 5px 10px #b3b3b3;
+}
+.eye-one , .eye-two {
+    opacity: .3;
+    margin-left: -30px;
+    transition: .3s;
+    cursor: pointer;
+ }
+ .eye-one:hover , .eye-two:hover {
+    opacity: 1;
+ }
+.log-in {
+    background: #204cdb;
+    color: #fff;
+    border: 2px solid #fff;
+    font-size: 23px;
+    padding-bottom: 35px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.p1 {
+    color: #030033;
+    font-size: 50px;
+    font-family:"Berlin Sans FB";
+    margin-left: -3%;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px #747e9e;
+}
+.p2 {
+    color: #7e7e7e;
+    font-size: 18px;
+    position: absolute;
+    background: #fff;
+    margin: 1% 0 0 1%;
+    letter-spacing: 1px;
+}
+.p3 {
+    font-size: 14px;
+    color: #060150;
+    letter-spacing: 1px;
+}
+.p4 {
+    font-size: 14px;
+    color: #6e6e6e;
+    letter-spacing: 1.5px;
+    margin-left: 12%;
+}
+a {
+    text-decoration: none;
+    color: #060150;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-left: 2%;
+}
+.error {
+    font-size: 13px;
+    margin-top: 15px;
+    margin-left: 20px;
+    color: red;
+    letter-spacing: 0.7px;
+    transform: .3s;
+}
